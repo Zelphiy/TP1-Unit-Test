@@ -1,5 +1,7 @@
 import unittest
-from code_binaire import Bit, CodeBinaire, AuMoinsUnBitErreur
+from modules.code_binaire import CodeBinaire
+from modules.bit import Bit
+from modules.au_moins_un_bit_erreur import AuMoinsUnBitErreur
 
 class TestCodeBinaire(unittest.TestCase):
     

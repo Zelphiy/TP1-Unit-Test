@@ -1,0 +1,2 @@
+class AuMoinsUnBitErreur(Exception):
+    pass
