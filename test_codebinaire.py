@@ -1,4 +1,5 @@
 import unittest
+from unittest.mock import Mock
 from modules.code_binaire import CodeBinaire
 from modules.bit import Bit
 from modules.au_moins_un_bit_erreur import AuMoinsUnBitErreur
@@ -142,6 +143,22 @@ class TestIntegration(unittest.TestCase):
         if len(code) > 0:
             premier_bit = code[0]
             self.assertIn(premier_bit, [Bit.BIT_0, Bit.BIT_1])
+
+    def test_integration_avec_mock(self):
+        mock_code = CodeBinaire(Bit.BIT_1, Bit.BIT_0, Bit.BIT_1)
+        with unittest.mock.patch('modules.lecteur_code_binaire.LecteurCodeBinaire.depuis_fichier') as mock_depuis_fichier:
+            mock_depuis_fichier.return_value = mock_code
+            
+            code = LecteurCodeBinaire.depuis_fichier("exemple_binaire.txt")
+            
+            mock_depuis_fichier.assert_called_once_with("exemple_binaire.txt")
+            
+            self.assertEqual(len(code), 3)
+            self.assertEqual(str(code), "101")
+            
+            autre_code = CodeBinaire(Bit.BIT_0)
+            resultat = code + autre_code
+            self.assertEqual(str(resultat), "1010")
 
 if __name__ == '__main__':
     unittest.main()
