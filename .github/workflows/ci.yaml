@@ -11,8 +11,6 @@ jobs:
       - name: Install dependencies
         run: pip install pytest
       - name: tests unitaires - codebinaire
-        run:
-          pytest ./tests/test_codebinaire.py
+        run: pytest ./tests/test_codebinaire.py
       - name: tests unitaires - demo_lecteur
-        run:
-          pytest ./tests/demo_lecteur.py
+        run: pytest ./tests/demo_lecteur.py
