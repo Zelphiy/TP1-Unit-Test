@@ -2,6 +2,7 @@ import unittest
 from modules.code_binaire import CodeBinaire
 from modules.bit import Bit
 from modules.au_moins_un_bit_erreur import AuMoinsUnBitErreur
+from modules.lecteur_code_binaire import LecteurCodeBinaire
 
 class TestCodeBinaire(unittest.TestCase):
     
@@ -125,6 +126,22 @@ class TestCodeBinaire(unittest.TestCase):
         
         self.assertEqual(str(Bit.BIT_0), "0")
         self.assertEqual(str(Bit.BIT_1), "1")
+
+class TestIntegration(unittest.TestCase):
+    
+    def test_integration(self):
+        code = LecteurCodeBinaire.depuis_fichier("exemple_binaire.txt")
+        
+        self.assertGreater(len(code), 0)
+        self.assertIsInstance(code, CodeBinaire)
+        
+        autre_code = CodeBinaire(Bit.BIT_1, Bit.BIT_0)
+        resultat = code + autre_code
+        self.assertEqual(len(resultat), len(code) + 2)
+        
+        if len(code) > 0:
+            premier_bit = code[0]
+            self.assertIn(premier_bit, [Bit.BIT_0, Bit.BIT_1])
 
 if __name__ == '__main__':
     unittest.main()
