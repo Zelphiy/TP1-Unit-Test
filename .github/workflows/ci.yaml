@@ -1,0 +1,13 @@
+name: Tests
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    needs: dependencies
+    steps:
+      - name: tests unitaires
+        run: 
+          pytest ./tests/test_codebinaire.py
+          pytest ./tests/demo_lecteur.py
