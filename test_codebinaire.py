@@ -145,10 +145,10 @@ class TestIntegration(unittest.TestCase):
             self.assertIn(premier_bit, [Bit.BIT_0, Bit.BIT_1])
 
     def test_integration_avec_mock(self):
-        mock_code = CodeBinaire(Bit.BIT_1, Bit.BIT_0, Bit.BIT_1)
-        with unittest.mock.patch('modules.lecteur_code_binaire.LecteurCodeBinaire.depuis_fichier') as mock_depuis_fichier:
-            mock_depuis_fichier.return_value = mock_code
-            
+        
+        mock_depuis_fichier = Mock(return_value=CodeBinaire(Bit.BIT_1, Bit.BIT_0, Bit.BIT_1))
+        
+        with unittest.mock.patch('modules.lecteur_code_binaire.LecteurCodeBinaire.depuis_fichier', mock_depuis_fichier):            
             code = LecteurCodeBinaire.depuis_fichier("exemple_binaire.txt")
             
             mock_depuis_fichier.assert_called_once_with("exemple_binaire.txt")
