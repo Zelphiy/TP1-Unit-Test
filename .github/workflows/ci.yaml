@@ -8,9 +8,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
+        with:
+          python-version: '3.13'
       - name: Install dependencies
-        run: pip install pytest
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest
       - name: tests unitaires - codebinaire
-        run: pytest ./tests/test_codebinaire.py
-      - name: tests unitaires - demo_lecteur
-        run: pytest ./tests/demo_lecteur.py
+        run: python -m pytest tests -q
