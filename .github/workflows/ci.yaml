@@ -10,7 +10,9 @@ jobs:
       - uses: actions/setup-python@v4
       - name: Install dependencies
         run: pip install pytest
-      - name: tests unitaires
-        run: 
+      - name: tests unitaires - codebinaire
+        run:
           pytest ./tests/test_codebinaire.py
+      - name: tests unitaires - demo_lecteur
+        run:
           pytest ./tests/demo_lecteur.py
