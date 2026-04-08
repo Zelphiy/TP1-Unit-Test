@@ -6,6 +6,10 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+      - name: Install dependencies
+        run: pip install pytest
       - name: tests unitaires
         run: 
           pytest ./tests/test_codebinaire.py
